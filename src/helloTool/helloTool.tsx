@@ -1,10 +1,10 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 interface HelloProps {
     message: string
 }
 const HelloToolComponent = ({ message }: HelloProps) => {
-    return <input value={message} />
+    return <input className="w-full outline-none" autoFocus placeholder="Type # for hashtag and activate the AI by '/AI' or select..." value={message} />
 }
 export class HelloTool {
     private readonly data: any;
@@ -20,8 +20,9 @@ export class HelloTool {
 
     render() {
         const container = document.createElement('div')
-        ReactDOM.render(
-            <HelloToolComponent {...this.data} />, container
+        const root = createRoot(container)
+        root.render(
+            <HelloToolComponent {...this.data} />
         )
         return container
     }
