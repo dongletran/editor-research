@@ -2,7 +2,6 @@ import React from 'react'
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "../../constanst";
 import { useCallback, useRef } from 'react';
-import NoteItem from "../Notes/NoteItems/NoteItem";
 import AddedNote from "./AddedNote/AddedNote";
 const ReactEditorJS = createReactEditorJS()
 

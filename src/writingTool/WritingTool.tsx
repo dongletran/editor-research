@@ -1,8 +1,7 @@
-import React from 'react'
 import Editor from './Editor/Editor'
 import Notes from './Notes/Notes'
 
-function WrittingTool() {
+function WritingTool() {
   return (
     <div className="flex min-h-[100vh] bg-slate-200">
       {/* Section 2 */}
@@ -47,4 +46,4 @@ function WrittingTool() {
   )
 }
 
-export default WrittingTool
+export default WritingTool
