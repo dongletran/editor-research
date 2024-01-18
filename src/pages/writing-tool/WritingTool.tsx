@@ -1,9 +1,9 @@
 import { useReducer } from "react";
-import Editor from "./Editor/Editor";
-import Notes from "./Notes/Notes";
-
 import { keyBy } from "lodash";
+
 import { notesMockData } from "../../mock";
+import Editor from "./editor/Editor";
+import Notes from "./notes/Notes";
 
 const reducer = (state: any, action: any) => {
   switch (action.type) {

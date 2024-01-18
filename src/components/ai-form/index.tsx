@@ -1,7 +1,8 @@
 import { get, isEmpty, keyBy } from "lodash";
 import React, { useCallback, useMemo, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import NoteSelected from "../../writing-tool/Editor/note-selected/NoteSelected";
+
+import NoteSelected from "../../pages/writing-tool/editor/note-selected/NoteSelected";
 
 function AIForm({
   top,

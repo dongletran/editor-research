@@ -25,7 +25,7 @@ import { IconText } from "@codexteam/icons";
  * @description Tool's input and output data format
  * @property {string} text — Paragraph's content. Can include HTML tags: <a><b><i>
  */
-export default class ParagraphCustom {
+export default class AIGenerated {
   /**
    * Default placeholder for Paragraph Tool
    *
@@ -74,7 +74,7 @@ export default class ParagraphCustom {
      */
     this._placeholder = config.placeholder
       ? config.placeholder
-      : ParagraphCustom.DEFAULT_PLACEHOLDER;
+      : AIGenerated.DEFAULT_PLACEHOLDER;
     this._data = {};
     this._element = null;
     this._preserveBlank =
@@ -108,22 +108,21 @@ export default class ParagraphCustom {
    * @private
    */
   drawView() {
-    const div = document.createElement("DIV") as any;
+    const span = document.createElement("span") as any;
 
-    div?.classList.add(this._CSS.wrapper, this._CSS.block);
-    div.contentEditable = false;
-    div.dataset.placeholder = this.api.i18n.t(this._placeholder);
+    span.contentEditable = false;
+    span.dataset.placeholder = this.api.i18n.t(this._placeholder);
 
     if (this._data.text) {
-      div.innerHTML = this._data.text;
+      span.innerHTML = this._data.text;
     }
 
     if (!this.readOnly) {
-      div.contentEditable = true;
-      div.addEventListener("keyup", this.onKeyUp);
+      span.contentEditable = true;
+      span.addEventListener("keyup", this.onKeyUp);
     }
 
-    return div;
+    return span;
   }
 
   /**
@@ -276,7 +275,7 @@ export default class ParagraphCustom {
   static get toolbox() {
     return {
       icon: IconText,
-      title: "P",
+      title: "AI-Generated",
     };
   }
 }

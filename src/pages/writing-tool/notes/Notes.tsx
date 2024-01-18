@@ -1,5 +1,5 @@
 import React from "react";
-import NoteItem from "./NoteItems/NoteItem";
+import NoteItem from "./note-item/NoteItem";
 
 function Notes({ notes, dispatch }: any) {
   return (

@@ -4,12 +4,11 @@ import { createReactEditorJS } from "react-editor-js";
 import { useRef } from "react";
 import { get, keyBy, round } from "lodash";
 
-import ParagraphCustom from "../../components/paragraph-custom";
+import ParagraphCustom from "../../../components/paragraph-custom";
+import AIForm from "../../../components/ai-form";
+import NoteSelected from "./note-selected/NoteSelected";
 
 import "./Editor.scss";
-
-import AIForm from "../../components/ai-form";
-import NoteSelected from "./note-selected/NoteSelected";
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -134,6 +133,7 @@ function Editor({ notes, dispatch, idsSelected }: any) {
         onChange={handleChangeEditorJS}
         defaultBlock="paragraph-custom"
         data={{ blocks: Object.values(blocks) }}
+        autofocus
       >
         <div id="custom" className="relative px-3 min-h-[100px]">
           {propertyAIForm.isShow ? (
