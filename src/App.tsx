@@ -1,4 +1,4 @@
-import WritingTool from "./writingTool/WritingTool";
+import WritingTool from "./pages/writing-tool/WritingTool";
 import "./styles.scss";
 
 function App() {

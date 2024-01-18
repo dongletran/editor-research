@@ -1,7 +1,42 @@
+import { useReducer } from "react";
 import Editor from "./Editor/Editor";
 import Notes from "./Notes/Notes";
 
+import { keyBy } from "lodash";
+import { notesMockData } from "../../mock";
+
+const reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "SELECTED_NOTE":
+      const { noteId } = action.payload;
+      return {
+        ...state,
+        idsSelected: {
+          ...state.idsSelected,
+          [`${noteId}`]: {
+            id: noteId,
+          },
+        },
+      };
+
+    case "REMOVE_NOTE_ID_SELECTED":
+      return {
+        ...state,
+        idsSelected: {},
+      };
+    default:
+      return state;
+  }
+};
+
 function WritingTool() {
+  const [notes, dispatch] = useReducer(reducer, {
+    items: keyBy(notesMockData, "id"),
+    idsSelected: {},
+  });
+
+  console.log("notes", notes);
+
   return (
     <div className="flex min-h-[100vh] bg-slate-200">
       {/* Section 2 */}
@@ -11,9 +46,9 @@ function WritingTool() {
       <div className="w-[40%] h-full p-4">
         <div className="flex justify-between items-center">
           <div className="flex gap-x-5 items-center">
-            <h1 className="text-lg">
+            <h3 className="text-lg">
               Untitled document <i className="bi bi-arrow-down-circle"></i>
-            </h1>
+            </h3>
             <span className="text-xs">0 word</span>
           </div>
           <div>
@@ -23,7 +58,11 @@ function WritingTool() {
           </div>
         </div>
         <div className="bg-white h-full ">
-          <Editor />
+          <Editor
+            notes={notes.items}
+            dispatch={dispatch}
+            idsSelected={notes.idsSelected}
+          />
         </div>
       </div>
 
@@ -31,9 +70,9 @@ function WritingTool() {
       <div className="w-[40%] h-full p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-x-2">
-            <h1 className="text-lg">
+            <h3 className="text-lg">
               References <i className="bi bi-dot text-lg"></i> 15 notes
-            </h1>
+            </h3>
             <span>
               Sort <i className="bi bi-filter"></i>
             </span>
@@ -48,7 +87,7 @@ function WritingTool() {
           </div>
         </div>
         <div className="h-full rounded-md mt-2">
-          <Notes />
+          <Notes notes={notes.items} dispatch={dispatch} />
         </div>
       </div>
     </div>

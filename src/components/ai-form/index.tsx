@@ -1,8 +1,16 @@
 import { get, isEmpty, keyBy } from "lodash";
 import React, { useCallback, useMemo, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+import NoteSelected from "../../writing-tool/Editor/note-selected/NoteSelected";
 
-function AIForm({ top, onCloseForm, blockId, onInsertAnswer }: any) {
+function AIForm({
+  top,
+  onCloseForm,
+  blockId,
+  onInsertAnswer,
+  notes,
+  idsSelected,
+}: any) {
   const [prompt, setPrompt] = useState("");
   const [answers, setAnswers] = useState({
     items: {},
@@ -18,8 +26,6 @@ function AIForm({ top, onCloseForm, blockId, onInsertAnswer }: any) {
   }, [answers]);
 
   const aiAPIFake = async (prompt: string) => {
-    console.log("prompt", prompt);
-
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return [
       {
@@ -114,11 +120,22 @@ function AIForm({ top, onCloseForm, blockId, onInsertAnswer }: any) {
         </div>
         <div className="border-t border-b border-gray-300">
           {!isSelectedAnswer ? (
-            <div className="flex gap-x-2 justify-center items-center bg-gray-200 py-1 px-2">
-              <p className="w-[96%] mb-0">
-                Tell AI {`${prompt ? `"${prompt}"` : ""}`}
-              </p>
-              <i className="bi bi-arrow-90deg-up -rotate-90 px-1 bg-gray-300" />
+            <div className="flex gap-x-2 justify-center items-center  py-1 px-2">
+              <div className="w-[96%]">
+                <p className="mb-0 text-gray-400 text-md">
+                  Tell AI {`${prompt ? `"${prompt}"` : ""}`}
+                </p>
+                <NoteSelected
+                  notes={notes}
+                  idsSelected={idsSelected}
+                  isShowAIForm={false}
+                />
+              </div>
+
+              <i
+                className="bi bi-arrow-90deg-up -rotate-90 px-1 bg-gray-300 cursor-pointer"
+                onClick={handleCallAIFakeAPI}
+              />
             </div>
           ) : (
             <TypeAnimation

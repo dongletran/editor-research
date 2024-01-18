@@ -145,9 +145,8 @@ export default class ParagraphCustom {
    * @public
    */
   merge(data: any) {
-    console.log("data", data);
-
     const newData = {
+      ...this.data,
       text: this.data.text + data.text,
     };
 
@@ -163,17 +162,11 @@ export default class ParagraphCustom {
    * @public
    */
   validate(savedData: any) {
-    // if (savedData.text.trim() === "" && !this._preserveBlank) {
-    //   return false;
-    // }
+    if (savedData.text.trim() === "" && !this._preserveBlank) {
+      return false;
+    }
 
     return true;
-  }
-
-  closeToolbar() {
-    this.api.toolbar.close();
-
-    // then do something else
   }
 
   /**
@@ -185,6 +178,7 @@ export default class ParagraphCustom {
    */
   save(toolsContent: any) {
     return {
+      ...this.data,
       text: toolsContent.innerHTML,
     };
   }
@@ -196,6 +190,7 @@ export default class ParagraphCustom {
    */
   onPaste(event: any) {
     const data = {
+      ...this.data,
       text: event.detail.data.innerHTML,
     };
 
